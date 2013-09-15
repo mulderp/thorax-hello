@@ -1,10 +1,10 @@
 define([
   'layout-view',
-  'templates/layouts/header'
+  'templates/layouts/sidebar'
 ], function(LayoutView, template) {
 
   var Header = LayoutView.extend({
-    name: 'layouts/header',
+    name: 'layouts/sidebar',
     template: template
   });
 

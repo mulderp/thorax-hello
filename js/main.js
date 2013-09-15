@@ -1,7 +1,7 @@
 require([
   'jquery',
   'backbone',
-  'views/root',
+  'views/layouts/application',
   'routers/hello-world'
 ], function ($, Backbone, RootView, HelloWorldRouter) {
   

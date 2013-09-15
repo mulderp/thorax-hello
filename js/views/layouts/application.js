@@ -2,14 +2,15 @@ define([
   'layout-view',
   'templates/root',
   'views/layouts/header',
-  'views/layouts/footer'
-], function(LayoutView, rootTemplate, HeaderLayout, FooterLayout) {
+  'views/layouts/footer',
+  'views/layouts/sidebar'
+], function(LayoutView, rootTemplate, HeaderLayout, FooterLayout, SidebarLayout) {
   var ApplicationLayout = LayoutView.extend({
     name: 'root',
     template: rootTemplate
   });
 
-  var instance, header, footer;
+  var instance, header, footer, sidebar;
   ApplicationLayout.getInstance = function(target) {
     if (!instance) {
       instance = new ApplicationLayout;
@@ -32,6 +33,14 @@ define([
       footer.appendTo(target || $('#footer'));
     }
     return footer;
+  };
+
+  ApplicationLayout.getSidebar = function(target) {
+    if (!sidebar) {
+      sidebar = new SidebarLayout;
+      sidebar.appendTo(target || $('#sidebar'));
+    }
+    return sidebar;
   };
 
   return ApplicationLayout;

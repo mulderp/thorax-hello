@@ -5,7 +5,7 @@ define([
 
   var Footer = LayoutView.extend({
     name: 'layouts/footer',
-    template: 'template'
+    template: template
   });
 
   return Footer;

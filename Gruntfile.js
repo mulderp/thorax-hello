@@ -12,6 +12,7 @@ module.exports = function(grunt) {
         },
         js: 'js',
         css: 'css',
+        sass: 'sass',
         templates: 'js/templates',
         views: 'js/views',
         models: 'js/models',
@@ -21,6 +22,7 @@ module.exports = function(grunt) {
   // Register required tasks
   grunt.loadTasks('tasks');
   grunt.loadNpmTasks('thorax-inspector');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   require('matchdep').filterDev('grunt-*').forEach(function(task) {
     if (task !== 'grunt-cli') {
       grunt.loadNpmTasks(task);
@@ -44,16 +46,13 @@ module.exports = function(grunt) {
             dest: 'public/js/require.js'
           }
         ]
-      },
-      styles: {
-        files: [
-          {
-            expand: true,
-            cwd: paths.css,
-            src: '*.css',
-            dest: paths.output.css
-          }
-        ]
+      }, 
+    },
+    sass: {
+      dev: {
+        files: {
+          'public/css/base.css': 'sass/base.sass'
+        }
       }
     },
     connect: {
@@ -109,8 +108,8 @@ module.exports = function(grunt) {
         tasks: ['scripts:development']
       },
       styles: {
-        files: [paths.css + '/**/*'],
-        tasks: ['copy:styles']
+        files: [paths.sass + '/**/*'],
+        tasks: ['sass:dev']
       }
     }
   });
@@ -204,7 +203,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('styles', [
-    'copy:styles'
+    'sass:dev'
   ]);
 
   grunt.registerTask('default', [

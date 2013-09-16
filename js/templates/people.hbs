@@ -1,5 +1,11 @@
 
+<h1>People</h1>
 
-people
 
+{{#collection tag="ul"}}
+  {{#link "details/{{id}}" expand-tokens=true}}
+    <li> {{firstName}} {{lastName}} {{number}} </li>
+  {{/link}}
+  {{#button "handleDelete"}}Delete{{/button}}
+{{/collection}}
 

@@ -4,6 +4,13 @@ define([
 ], function(View, template) {
   return Thorax.View.extend({
     name: 'sidebar',
-    template: template
+    template: template,
+
+    events: {
+      'click a': function(ev) {
+        var action = $(ev.currentTarget).data('action');
+        this.model.select(action);
+      }
+    }
   })
 })

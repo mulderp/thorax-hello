@@ -7,40 +7,24 @@ define([
 ], function(LayoutView, rootTemplate, HeaderLayout, FooterLayout, SidebarLayout) {
   var ApplicationLayout = LayoutView.extend({
     name: 'root',
-    template: rootTemplate
+    template: rootTemplate,
+    initialize: function() {
+      this.header = new HeaderLayout;
+      this.footer = new FooterLayout;
+      this.sidebar = new SidebarLayout;
+    }
   });
 
-  var instance, header, footer, sidebar;
+  var instance;
   ApplicationLayout.getInstance = function(target) {
     if (!instance) {
       instance = new ApplicationLayout;
       instance.appendTo(target || document.body);
+      instance.header.appendTo($('#header'));
+      instance.footer.appendTo($('#footer'));
+      instance.sidebar.appendTo($('#sidebar'));
     }
     return instance;
-  };
-
-  ApplicationLayout.getHeader = function(target) {
-    if (!header) {
-      header = new HeaderLayout;
-      header.appendTo(target || $('#header'));
-    }
-    return header;
-  };
-
-  ApplicationLayout.getFooter = function(target) {
-    if (!footer) {
-      footer = new FooterLayout;
-      footer.appendTo(target || $('#footer'));
-    }
-    return footer;
-  };
-
-  ApplicationLayout.getSidebar = function(target) {
-    if (!sidebar) {
-      sidebar = new SidebarLayout;
-      sidebar.appendTo(target || $('#sidebar'));
-    }
-    return sidebar;
   };
 
   return ApplicationLayout;

@@ -16,9 +16,9 @@ define([
     },
     index: function() {
       // Data
-    var people = new People([{firstName: 'Patrick', lastName: 'Mulder'},
-                             {firstName: 'Colin', lastName: 'Megill'},
-                             {firstName: 'Ryan', lastName: 'Eastridge'}]);
+      var people = new People([{id: 1, firstName: 'Patrick', lastName: 'Mulder'},
+                               {id: 2, firstName: 'Colin', lastName: 'Megill'},
+                               {id: 3, firstName: 'Ryan', lastName: 'Eastridge'}]);
       var menu = new Menu({selected: 'new_contact'});
 
       // UI
@@ -44,9 +44,13 @@ define([
           addPerson.retain();
           layout.setView(index);
         }
+        if (menu.get('selected') == 'details') {
+          var details = new DetailsUI({collection: people});
+          layout.setView(details);
+        }
       });
-
     },
+
     details: function(id) {
       console.log(id);
     }

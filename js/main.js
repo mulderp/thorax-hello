@@ -10,7 +10,11 @@ require([
     // and initialize all routers here, the callback
     // `next` is provided in case the operations
     // needed are aysynchronous
-    new HelloWorldRouter;
+    var channel  = _.extend({}, Backbone.Events);
+    channel.on("something", function() {
+      console.log("******");
+    });
+    var router = new HelloWorldRouter({channel: channel});
 
     next();
   });

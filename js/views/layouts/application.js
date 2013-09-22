@@ -16,16 +16,14 @@ define([
 
       this.listenTo(channel, 'sidebar', function(action) {
         // this.header.updateAction(action);
-        var index = new Thorax.Views['people'];
-        var addPerson = new Thorax.Views['new_person'];
         if (action === 'new') {
-          //index.retain();
-          this.setView(addPerson);
+          this.index.retain();
+          this.setView(this.addPerson);
           //
         }
         if (action === 'index') {
-          // addPerson.retain();
-          this.setView(index);
+          this.addPerson.retain();
+          this.setView(this.index);
         }
       }, this);
     }
@@ -39,6 +37,17 @@ define([
       instance.header.appendTo($('#header'));
       instance.footer.appendTo($('#footer'));
       instance.sidebar.appendTo($('#sidebar'));
+
+      instance.index = new Thorax.Views['people/index']({collection: instance.people});
+      instance.addPerson = new Thorax.Views['new_person']({collection: instance.people});
+      var header = new Thorax.Views['header']();
+      var sidebar = new Thorax.Views['sidebar']({model: this.menu});
+      var footer = new Thorax.Views['footer']();
+
+      instance.header.setView(header);
+      instance.sidebar.setView(sidebar);
+      instance.footer.setView(footer);
+      instance.setView(instance.index);
     }
     return instance;
   };

@@ -1,10 +1,11 @@
 define([
+  'channel',
   'layout-view',
   'templates/root',
   'views/layouts/header',
   'views/layouts/footer',
   'views/layouts/sidebar'
-], function(LayoutView, rootTemplate, HeaderLayout, FooterLayout, SidebarLayout) {
+], function(channel, LayoutView, rootTemplate, HeaderLayout, FooterLayout, SidebarLayout) {
   var ApplicationLayout = LayoutView.extend({
     name: 'root',
     template: rootTemplate,
@@ -12,6 +13,21 @@ define([
       this.header = new HeaderLayout;
       this.footer = new FooterLayout;
       this.sidebar = new SidebarLayout;
+
+      this.listenTo(channel, 'sidebar', function(action) {
+        // this.header.updateAction(action);
+        var index = new Thorax.Views['people'];
+        var addPerson = new Thorax.Views['new_person'];
+        if (action === 'new') {
+          //index.retain();
+          this.setView(addPerson);
+          //
+        }
+        if (action === 'index') {
+          // addPerson.retain();
+          this.setView(index);
+        }
+      }, this);
     }
   });
 

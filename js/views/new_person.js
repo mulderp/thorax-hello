@@ -3,7 +3,7 @@ define([
   'templates/new_person'
 ], function(View, template) {
   return Thorax.View.extend({
-    name: 'header',
+    name: 'new_person',
     template: template,
     events: {
       "submit form": function(ev){

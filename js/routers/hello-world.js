@@ -29,20 +29,6 @@ define([
       layout.sidebar.setView(sidebar);
       layout.footer.setView(footer);
       layout.setView(index);
-
-      var that = this;
-      this.menu.bind('change:selected', function(ev) {
-        if (that.menu.get('selected') == 'new') {
-          index.retain();
-          layout.setView(addPerson);
-        }
-        if (that.menu.get('selected') == 'index') {
-          addPerson.retain();
-          layout.setView(index);
-        }
-        if (that.menu.get('selected') == 'details') {
-        }
-      });
     },
 
     details: function(id) {
@@ -51,9 +37,8 @@ define([
       layout.setView(details);
     },
 
-    initialize: function(options) {
+    initialize: function() {
       console.log("*** init");
-      console.log(options.channel);
       
       // Data
       this.people = new People([{id: 1, firstName: 'Patrick', lastName: 'Mulder'},
